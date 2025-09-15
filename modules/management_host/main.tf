@@ -31,5 +31,5 @@ resource "aws_instance" "management_host" {
 }
 resource "aws_eip" "management_host" {
   instance = aws_instance.management_host.id
-  vpc      = true
+  domain   = "vpc"
 }
