@@ -13,7 +13,7 @@ variable "aws_region" {
 }
 variable "base_cidr_block" {
   type        = string
-  description = "The private IP address range to be assinged to the VPC. Should be at minimum a /16 address range."
+  description = "The private IP address range to be assigned to the VPC. Should be at minimum a /16 address range."
   default     = "10.0.0.0/16"
 }
 variable "aws_profile_name" {
@@ -25,6 +25,7 @@ provider "aws" {
   region  = var.aws_region
   profile = var.aws_profile_name
 }
+
 resource "aws_vpc" "terraform_demo" {
   cidr_block = var.base_cidr_block
 }
@@ -60,7 +61,7 @@ resource "aws_route_table_association" "public_subnet_route_association" {
   route_table_id = aws_route_table.inet_gateway_route_table.id
 }
 resource "aws_eip" "nat_gateway" {
-  vpc = true
+  domain = "vpc"
 }
 resource "aws_nat_gateway" "nat_gateway" {
   allocation_id = aws_eip.nat_gateway.id
